@@ -21,3 +21,19 @@ body {
     padding: 10px;
     border-radius: 10px;
 }
+
+#addMinuteBtn {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.2em;
+    padding: 15px 30px;
+    margin-top: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#addMinuteBtn:hover {
+    background-color: #45a049;
+}
