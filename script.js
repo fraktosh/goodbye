@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Function to get the countdown end time from local storage or use a default value
     function getCountdownDate() {
-        return parseInt(localStorage.getItem('countDownDate')) || new Date("Dec 31, 2023 23:59:59").getTime();
+        return parseInt(localStorage.getItem('countDownDate')) || new Date("Sep 6, 2024 23:59:59").getTime();
     }
 
     // Function to update the countdown display
