@@ -34,31 +34,32 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 1000);
     }
 
-    // Function to play background music
-    function playBackgroundMusic() {
-        const backgroundMusic = document.getElementById('backgroundMusic');
-        backgroundMusic.play();
-    }
+    // Get the audio element
+    const backgroundMusic = document.getElementById("backgroundMusic");
 
-    // Function to pause background music
-    function pauseBackgroundMusic() {
-        const backgroundMusic = document.getElementById('backgroundMusic');
-        backgroundMusic.pause();
-    }
-
-    // Function to toggle background music
-    function toggleBackgroundMusic() {
-        const backgroundMusic = document.getElementById('backgroundMusic');
+    // Play the background music immediately when the document is fully loaded
+    document.addEventListener('DOMContentLoaded', function () {
+        // Check if the audio is paused and then play it
         if (backgroundMusic.paused) {
-            playBackgroundMusic();
-        } else {
-            pauseBackgroundMusic();
+            backgroundMusic.play();
+        }
+    });
+
+    // Function to play or pause the background music
+    function toggleBackgroundMusic(event) {
+        // Check if the click occurred outside the buttons
+        if (!event.target.matches("#addMinuteBtn")) {
+            // Toggle play/pause
+            if (backgroundMusic.paused) {
+                backgroundMusic.play();
+            } else {
+                backgroundMusic.pause();
+            }
         }
     }
 
-    // Play background music immediately when the page loads
-    toggleBackgroundMusic();
-    playBackgroundMusic();
+    // Add event listener for clicks on the document body
+    document.body.addEventListener('click', toggleBackgroundMusic);
 
     function addMinute() {
         let countDownDate = getCountdownDate();
