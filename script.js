@@ -1,25 +1,30 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // Function to get the countdown end time from local storage or use a default value
+    function getCountdownDate() {
+        return parseInt(localStorage.getItem('countDownDate')) || new Date("September 9, 2024 23:59:59").getTime();
+    }
+
+    // Function to update the countdown display
+    function updateCountdownDisplay(distance) {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s `;
+    }
+
     // Function to update the countdown
     function updateCountdown() {
-        // Get the saved countdown end time from local storage or use a default value
-        let countDownDate = parseInt(localStorage.getItem('countDownDate')) || new Date("Dec 31, 2023 23:59:59").getTime();
-
         // Update the countdown every 1 second
         const x = setInterval(function () {
-            // Get the current date and time
-            const now = new Date().getTime();
+            const countDownDate = getCountdownDate();  // Get the countdown date inside the interval
 
-            // Calculate the remaining time
+            const now = new Date().getTime();
             const distance = countDownDate - now;
 
-            // Calculate days, hours, minutes, and seconds
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
             // Display the countdown
-            document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s `;
+            updateCountdownDisplay(distance);
 
             // If the countdown is over, display a message
             if (distance < 0) {
@@ -31,19 +36,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to add 1 minute to the countdown
     function addMinute() {
-        let countDownDate = parseInt(localStorage.getItem('countDownDate')) || new Date("Dec 31, 2023 23:59:59").getTime();
+        let countDownDate = getCountdownDate();
         countDownDate += 60000; // Add 1 minute (60,000 milliseconds)
 
         // Save the updated countdown end time to local storage
         localStorage.setItem('countDownDate', countDownDate);
 
-        // Update the countdown
+        // Update the countdown immediately
         updateCountdown();
     }
 
     // Add event listener for the button click
     document.getElementById("addMinuteBtn").addEventListener('click', addMinute);
 
-    // Initial call to update the countdown
+    // Initial call to update the countdown immediately
     updateCountdown();
 });
