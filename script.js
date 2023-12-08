@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Function to get the countdown end time from local storage or use a default value
     function getCountdownDate() {
-        return parseInt(localStorage.getItem('countDownDate')) || new Date("Sep 6, 2024 23:59:59").getTime();
+        return parseInt(localStorage.getItem('countDownDate')) || new Date("Sep 30, 2024 23:59:59").getTime();
     }
 
     // Function to update the countdown display
@@ -59,8 +59,19 @@ document.addEventListener('DOMContentLoaded', function () {
     // Play background music immediately when the page loads
     playBackgroundMusic();
 
+    function addMinute() {
+        let countDownDate = getCountdownDate();
+        countDownDate += 60000; // Add 1 minute (60,000 milliseconds)
+
+        // Save the updated countdown end time to local storage
+        localStorage.setItem('countDownDate', countDownDate);
+
+        // Update the countdown immediately
+        updateCountdown();
+    }
+
     // Add event listener for the button click to toggle background music
-    document.getElementById("addMinuteBtn").addEventListener('click', toggleBackgroundMusic);
+    document.getElementById("addMinuteBtn").addEventListener('click', addMinute);
 
     // Initial call to update the countdown immediately
     updateCountdown();
