@@ -34,20 +34,33 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 1000);
     }
 
-    // Function to add 1 minute to the countdown
-    function addMinute() {
-        let countDownDate = getCountdownDate();
-        countDownDate += 60000; // Add 1 minute (60,000 milliseconds)
-
-        // Save the updated countdown end time to local storage
-        localStorage.setItem('countDownDate', countDownDate);
-
-        // Update the countdown immediately
-        updateCountdown();
+    // Function to play background music
+    function playBackgroundMusic() {
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        backgroundMusic.play();
     }
 
-    // Add event listener for the button click
-    document.getElementById("addMinuteBtn").addEventListener('click', addMinute);
+    // Function to pause background music
+    function pauseBackgroundMusic() {
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        backgroundMusic.pause();
+    }
+
+    // Function to toggle background music
+    function toggleBackgroundMusic() {
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        if (backgroundMusic.paused) {
+            playBackgroundMusic();
+        } else {
+            pauseBackgroundMusic();
+        }
+    }
+
+    // Play background music immediately when the page loads
+    playBackgroundMusic();
+
+    // Add event listener for the button click to toggle background music
+    document.getElementById("addMinuteBtn").addEventListener('click', toggleBackgroundMusic);
 
     // Initial call to update the countdown immediately
     updateCountdown();
